@@ -207,6 +207,9 @@ const Contact = () => {
           <a href="tel:03204078238" className="text-gray-400 hover:text-[#00cea8] text-[10px] transition-colors">
             📱 03204078238
           </a>
+          <span className="text-gray-400 text-[10px]">
+            📍 College Road, Township, Lahore
+          </span>
         </div>
       </motion.div>
       
