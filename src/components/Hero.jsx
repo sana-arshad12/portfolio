@@ -51,12 +51,12 @@ const Hero = () => {
 
   return (
     <section 
-      className="relative w-full h-screen mx-auto overflow-hidden"
+      className="relative w-full h-screen mx-auto"
       aria-label="Hero section introducing Sana Arshad"
     >
       {/* Priority content for LCP - renders immediately */}
       <div
-        className={`${styles.paddingX} inset-0 sm:top-[70px] top-[90px] absolute max-w-7xl mx-auto flex flex-row items-start gap-5 z-10`}
+        className={`${styles.paddingX} inset-0 sm:top-[70px] top-[90px] absolute max-w-6xl flex flex-row items-start gap-5 z-10 pointer-events-none`}
       >
         <motion.div 
           className="flex flex-col justify-center items-center mt-5"
@@ -111,19 +111,19 @@ const Hero = () => {
             className={`${styles.heroSubText} mt-3 text-gray-300`}
             variants={textChild}
           >
-            <span className="text-white font-semibold">Web Developer</span>, <span className="text-[#00cea8]">WordPress Expert</span>{" "}
+            <span className="text-white font-semibold">Full Stack Developer</span>, <span className="text-[#00cea8]">WordPress Expert</span>{" "}
             <br className="sm:block hidden" />
             and <span className="text-[#bf61ff]">SEO Specialist</span>
           </motion.p>
           
           {/* CTA Buttons */}
           <motion.div 
-            className="mt-8 flex flex-wrap gap-4"
+            className="mt-6 flex flex-wrap gap-3 pointer-events-auto"
             variants={textChild}
           >
             <motion.a
               href="#contact"
-              className="px-6 py-3 bg-gradient-to-r from-[#915eff] to-[#bf61ff] text-white font-semibold rounded-xl flex items-center gap-2 shadow-lg shadow-[#915eff]/25"
+              className="px-5 py-2.5 text-sm bg-gradient-to-r from-[#915eff] to-[#bf61ff] text-white font-semibold rounded-xl flex items-center gap-2 shadow-lg shadow-[#915eff]/25"
               whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(145, 94, 255, 0.4)" }}
               whileTap={{ scale: 0.95 }}
             >
@@ -131,7 +131,7 @@ const Hero = () => {
             </motion.a>
             <motion.a
               href="#work"
-              className="px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-xl flex items-center gap-2 hover:bg-white/10 transition-colors"
+              className="px-5 py-2.5 text-sm bg-white/5 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-xl flex items-center gap-2 hover:bg-white/10 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -149,8 +149,8 @@ const Hero = () => {
       )}
 
       {/* Scroll indicator */}
-      <div className="absolute sm:bottom-20 bottom-32 w-full flex justify-center items-center z-10">
-        <a href="#about" aria-label="Scroll to about section">
+      <div className="absolute sm:bottom-20 bottom-32 w-full flex justify-center items-center z-10 pointer-events-none">
+        <a href="#about" aria-label="Scroll to about section" className="pointer-events-auto">
           <motion.div 
             className="w-[35px] h-[64px] rounded-3xl border-2 border-white/30 flex justify-center items-start p-2 backdrop-blur-sm bg-white/5"
             initial={{ opacity: 0, y: 20 }}

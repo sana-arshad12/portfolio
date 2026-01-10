@@ -30,6 +30,9 @@ import {
   umtCert,
   aleemMedical,
   aspireCollege,
+  shifftus,
+  geminiApp,
+  virtualAssistant,
 } from "../assets";
 
 export const navLinks = [
@@ -61,7 +64,7 @@ export const navLinks = [
 
 const services = [
   {
-    title: "Web Developer",
+    title: "Full Stack Developer",
     icon: web,
   },
   {
@@ -71,10 +74,6 @@ const services = [
   {
     title: "SEO Expert",
     icon: backend,
-  },
-  {
-    title: "Frontend Developer",
-    icon: creator,
   },
 ];
 
@@ -131,7 +130,7 @@ const technologies = [
 
 const experiences = [
   {
-    title: "Frontend Developer",
+    title: "Full Stack Developer",
     company_name: "Shifft.us",
     icon: web,
     iconBg: "#1a1a2e",
@@ -222,47 +221,46 @@ const projects = [
     live_website_link: "https://guiprojects.com/",
   },
   {
-    name: "Responsive Web Development",
+    name: "Shifft.us - Web Platform",
     description:
-      "Developed responsive webpages using HTML, CSS, JavaScript, and Bootstrap framework. Focused on ensuring optimal functionality, user experience, and seamless interaction across various devices and screen sizes with industry best practices.",
+      "A modern full-stack web platform built with React.js and modern CSS frameworks. Features responsive UI components, pixel-perfect design implementation, and optimized performance for seamless user experiences across all devices.",
     tags: [
       {
-        name: "html",
+        name: "react",
         color: "blue-text-gradient",
       },
       {
-        name: "bootstrap",
+        name: "fullstack",
         color: "green-text-gradient",
       },
       {
-        name: "javascript",
+        name: "responsive",
         color: "pink-text-gradient",
       },
     ],
-    image: falverra,
+    image: shifftus,
     source_code_link: "https://github.com/SanaArshad12",
-    live_website_link: "https://github.com/SanaArshad12",
+    live_website_link: "https://shifft.us/",
   },
   {
-    name: "MySQL Database Solutions",
+    name: "Virtual Assistant",
     description:
-      "Authored stored procedures for MySQL databases, enhancing data retrieval and manipulation efficiency while maintaining data integrity. Implemented best practices for database optimization and performance improvement.",
+      "A smart virtual assistant supporting both voice and chat interactions. It can answer questions, have conversations, and execute system commands like opening File Manager, Microsoft Word, Calculator, Notepad, and other applications. Built with Python for seamless hands-free productivity.",
     tags: [
       {
-        name: "mysql",
+        name: "python",
         color: "blue-text-gradient",
       },
       {
-        name: "database",
+        name: "ai",
         color: "green-text-gradient",
       },
       {
-        name: "optimization",
+        name: "voice-recognition",
         color: "pink-text-gradient",
       },
     ],
-    image: tripguide,
-    source_code_link: "https://github.com/SanaArshad12",
+    image: virtualAssistant,
     live_website_link: "https://github.com/SanaArshad12",
   },
   {
@@ -305,7 +303,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: falverra,
+    image: geminiApp,
     source_code_link: "https://github.com/SanaArshad12/AI-chat-with-react",
     live_website_link: "https://ai-chat-with-react-753i.vercel.app",
   },
@@ -338,7 +336,7 @@ const education = [
     degree: "Bachelor's Degree",
     field: "BS Computer Science",
     institution: "National University of Management and Technology (NUMT)",
-    date: "In Progress",
+    date: "2022 - 2026",
     icon: sheryians,
     iconBg: "#E6DEDD",
     description: "Currently pursuing Bachelor's degree in Computer Science, focusing on software development, algorithms, and modern web technologies.",
@@ -347,7 +345,7 @@ const education = [
     degree: "Intermediate",
     field: "Pre-Medical",
     institution: "Minhaj College",
-    date: "Completed",
+    date: "2020 - 2022",
     icon: freelance,
     iconBg: "#0188E3",
     description: "Completed intermediate education with pre-medical focus, building strong analytical and problem-solving foundations.",

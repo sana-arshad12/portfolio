@@ -28,6 +28,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* GPU acceleration for smoother animations */
+canvas {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, .transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,

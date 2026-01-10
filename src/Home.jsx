@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, { Suspense, lazy } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 
@@ -21,14 +21,6 @@ const SectionLoader = () => (
 );
 
 const Home = () => {
-  const [showStars, setShowStars] = useState(false);
-
-  useEffect(() => {
-    // Delay stars canvas for better initial load
-    const timer = setTimeout(() => setShowStars(true), 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div className="relative z-0 bg-[#050816]">
       <div className="bg-hero-pattern bg-no-repeat bg-cover bg-center">
@@ -40,39 +32,36 @@ const Home = () => {
         <About />
       </Suspense>
       
+      <Suspense fallback={<SectionLoader />}>
+        <Experience />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <Education />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <Tech />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <Works />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <Certificates />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <Resume />
+      </Suspense>
+      
       <div className="relative z-0">
-        {showStars && (
-          <Suspense fallback={null}>
-            <StarsCanvas />
-          </Suspense>
-        )}
-        
-        <Suspense fallback={<SectionLoader />}>
-          <Experience />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <Education />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <Tech />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <Works />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <Certificates />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <Resume />
-        </Suspense>
-        
         <Suspense fallback={<SectionLoader />}>
           <Contact />
+        </Suspense>
+        <Suspense fallback={null}>
+          <StarsCanvas />
         </Suspense>
       </div>
     </div>

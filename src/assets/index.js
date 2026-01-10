@@ -59,14 +59,19 @@ const falverra =
 const tripguide =
   "https://ik.imagekit.io/bqzlidc77g/my%20portfolio/tripguide.png?updatedAt=1749961172334";
 
+// Project images - local imports
+import shifftus from "./Projects/shifft.us.png";
+import geminiApp from "./Projects/gemini.png";
+import virtualAssistant from "./Projects/virtual assistent .png";
+
 // Award images - local imports
-import ituCert from "./ITU.png";
-import laptopPic from "./laptop pic.jpeg";
-import lumsCert from "./LUMS.png";
-import numlCert from "./NUML.png";
-import umtCert from "./umt.png";
-import aleemMedical from "./ALEEM MEDICAL.png";
-import aspireCollege from "./ASPIRE COLLEGE.png";
+import ituCert from "./Awards/ITU.png";
+import laptopPic from "./Awards/laptop pic.jpeg";
+import lumsCert from "./Awards/LUMS.png";
+import numlCert from "./Awards/NUML.png";
+import umtCert from "./Awards/umt.png";
+import aleemMedical from "./Awards/ALEEM MEDICAL.png";
+import aspireCollege from "./Awards/ASPIRE COLLEGE.png";
 
 export {
   logo,
@@ -97,6 +102,9 @@ export {
   macbookpro,
   falverra,
   tripguide,
+  shifftus,
+  geminiApp,
+  virtualAssistant,
   ituCert,
   laptopPic,
   lumsCert,
