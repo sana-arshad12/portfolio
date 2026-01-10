@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { slideIn } from "../utils/motion";
@@ -10,8 +11,10 @@ import { SectionWrapper } from "../hoc";
 // Phone: 03204078238
 // GitHub: github.com/SanaArshad12
 
-// API endpoint for contact form (Nodemailer + Gmail backend)
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+// EmailJS Configuration
+const EMAILJS_SERVICE_ID = "service_u940515";
+const EMAILJS_TEMPLATE_ID = "template_0kf7k5m";
+const EMAILJS_PUBLIC_KEY = "YeXB_swl7d75Djpju";
 
 // Custom Toast Notification Component
 const Toast = ({ message, type, onClose }) => {
@@ -103,32 +106,27 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      // Send email using Nodemailer backend
-      const response = await fetch(`${API_URL}/api/contact`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      // Send email using EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
           name: form.name,
           email: form.email,
           message: form.message,
-        }),
+          title: `Portfolio Contact from ${form.name}`,
+          time: new Date().toLocaleString(),
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+
+      setLoading(false);
+      showToast("Thank you for your message! I will get back to you as soon as possible. 😊", "success");
+      setForm({
+        name: "",
+        email: "",
+        message: "",
       });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setLoading(false);
-        showToast("Thank you for your message! I will get back to you as soon as possible. 😊", "success");
-        setForm({
-          name: "",
-          email: "",
-          message: "",
-        });
-      } else {
-        throw new Error(data.message || "Failed to send email");
-      }
     } catch (error) {
       setLoading(false);
       console.error("Email Error:", error);
