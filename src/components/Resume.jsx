@@ -8,7 +8,7 @@ const Resume = () => {
   const [showPdf, setShowPdf] = useState(false);
   
   // Your resume PDF file name in the public folder
-  const resumePath = "/SANA RESUME-ZHr1zsk1.pdf";
+  const resumePath = "/sana-resume.pdf";
 
   const handleDownload = () => {
     const link = document.createElement("a");
