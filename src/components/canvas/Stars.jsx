@@ -1,16 +1,31 @@
-import React from "react";
-import { useRef, useState, Suspense } from "react";
+import React, { useMemo } from "react";
+import { useRef, Suspense } from "react";
 import { PointMaterial, Preload, Points } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as random from "maath/random/dist/maath-random.esm";
 
 const Stars = (props) => {
   const ref = useRef();
-  const sphere = random.inSphere(new Float32Array(5000), { radius: 1.2 });
+  
+  // Use useMemo to generate positions once and filter out any NaN values
+  const sphere = useMemo(() => {
+    const positions = new Float32Array(5000 * 3);
+    random.inSphere(positions, { radius: 1.2 });
+    
+    // Filter out any NaN values by replacing them with valid coordinates
+    for (let i = 0; i < positions.length; i++) {
+      if (isNaN(positions[i])) {
+        positions[i] = (Math.random() - 0.5) * 2.4; // Random value within radius
+      }
+    }
+    return positions;
+  }, []);
 
   useFrame((state, delta) => {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
+    if (ref.current) {
+      ref.current.rotation.x -= delta / 10;
+      ref.current.rotation.y -= delta / 15;
+    }
   });
 
   return (
@@ -37,7 +52,17 @@ const StarsCanvas = () => {
         gl={{ 
           antialias: true,
           powerPreference: "high-performance",
-          alpha: true
+          alpha: true,
+          failIfMajorPerformanceCaveat: false
+        }}
+        onCreated={({ gl }) => {
+          gl.domElement.addEventListener('webglcontextlost', (e) => {
+            e.preventDefault();
+            console.warn('WebGL context lost. Will restore when possible.');
+          }, false);
+          gl.domElement.addEventListener('webglcontextrestored', () => {
+            console.log('WebGL context restored.');
+          }, false);
         }}
       >
         <Suspense fallback={null}>

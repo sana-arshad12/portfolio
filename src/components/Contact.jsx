@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { slideIn } from "../utils/motion";
@@ -13,6 +13,35 @@ import { SectionWrapper } from "../hoc";
 // API endpoint for contact form (Nodemailer + Gmail backend)
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
+// Custom Toast Notification Component
+const Toast = ({ message, type, onClose }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -50, scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -20, scale: 0.9 }}
+      className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50"
+    >
+      <div className={`px-6 py-4 rounded-xl shadow-2xl backdrop-blur-md border ${
+        type === 'success' 
+          ? 'bg-gradient-to-r from-[#00cea8]/90 to-[#00cea8]/70 border-[#00cea8]/30' 
+          : 'bg-gradient-to-r from-red-500/90 to-red-600/70 border-red-500/30'
+      }`}>
+        <div className="flex items-center gap-3">
+          <span className="text-2xl">{type === 'success' ? '✅' : '❌'}</span>
+          <p className="text-white font-medium text-sm max-w-[300px]">{message}</p>
+          <button 
+            onClick={onClose}
+            className="ml-2 text-white/80 hover:text-white transition-colors"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 const Contact = () => {
   const formRef = useRef();
   const [form, setForm] = useState({
@@ -22,6 +51,14 @@ const Contact = () => {
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
+
+  const showToast = (message, type = 'success') => {
+    setToast({ show: true, message, type });
+    setTimeout(() => {
+      setToast({ show: false, message: '', type: 'success' });
+    }, 5000);
+  };
 
   const validateForm = () => {
     const newErrors = {};
@@ -83,7 +120,7 @@ const Contact = () => {
 
       if (data.success) {
         setLoading(false);
-        alert("Thank you for your message! I will get back to you as soon as possible. 😊");
+        showToast("Thank you for your message! I will get back to you as soon as possible. 😊", "success");
         setForm({
           name: "",
           email: "",
@@ -95,11 +132,23 @@ const Contact = () => {
     } catch (error) {
       setLoading(false);
       console.error("Email Error:", error);
-      alert("Oops! Something went wrong. Please try again or contact me directly at sanaarshad1209@gmail.com");
+      showToast("Oops! Something went wrong. Please try again or contact me directly at sanaarshad1209@gmail.com", "error");
     }
   };
   return (
-    <div className="xl:mt-4 xl:flex-row flex-col-reverse flex gap-4 overflow-hidden">
+    <>
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {toast.show && (
+          <Toast 
+            message={toast.message} 
+            type={toast.type} 
+            onClose={() => setToast({ show: false, message: '', type: 'success' })}
+          />
+        )}
+      </AnimatePresence>
+      
+      <div className="xl:mt-4 xl:flex-row flex-col-reverse flex gap-4 overflow-hidden">
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
         className="flex-[0.6] bg-gradient-to-br from-[#1d1836]/90 to-[#0c0a1d]/95 p-4 rounded-xl border border-white/5 backdrop-blur-sm relative overflow-hidden"
@@ -125,6 +174,7 @@ const Contact = () => {
               value={form.name}
               onChange={handleChange}
               placeholder="What's your name?"
+              autoComplete="name"
               className="bg-[#1d1836] py-2 px-3 placeholder:text-gray-500 text-white text-xs rounded-lg outline-none border border-white/10 font-medium focus:border-[#915eff]/50 transition-all"
               required
             />
@@ -141,6 +191,7 @@ const Contact = () => {
               value={form.email}
               onChange={handleChange}
               placeholder="What's your email?"
+              autoComplete="email"
               className="bg-[#1d1836] py-2 px-3 placeholder:text-gray-500 text-white text-xs rounded-lg outline-none border border-white/10 font-medium focus:border-[#915eff]/50 transition-all"
               required
             />
@@ -199,6 +250,7 @@ const Contact = () => {
         <EarthCanvas />
       </motion.div>
     </div>
+    </>
   );
 };
 
