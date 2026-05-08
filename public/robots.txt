@@ -1,0 +1,10 @@
+# Robots.txt for Sana Arshad Portfolio
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://sanaarshad.com/sitemap.xml
+
+# Disallow admin or private paths (if any)
+Disallow: /api/
+Disallow: /*.json$
